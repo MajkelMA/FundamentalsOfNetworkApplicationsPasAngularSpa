@@ -1,0 +1,45 @@
+<!-- header -->
+<div class="mt-5 ml-5 mr-5">
+    <ul class="nav nav-tabs mt-3 ml-3 mr-3">
+      <div class="ml-3 mr-3">
+        <h2>PasSpa</h2>
+      </div>
+      <div layout-align="end center">
+        <button type="button" style="vertical-align: middle" class="btn btn-outline-secondary" routerLink='/create'>
+          Create
+        </button>
+      </div>
+    </ul>
+  
+    <!-- body -->
+    <div class="card mt-3 ml-3 mr-3">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th style="text-align:center">Options</th>
+          </tr>
+        </thead>
+        <tbody *ngFor='let i=index; let facility of facilities'>
+          <tr>
+            <th>{{i + 1}}</th>
+            <td>{{facility.id}}</td>
+            <td>{{facility.name}}</td>
+            <td>{{facility.type}}</td>
+            <td style="text-align:center">
+              <button type="button" style="margin:5px;" class="btn btn-outline-warning" (click)="editFacility(facility.id)">Edit</button>
+              <button type="button" style="margin:5px;" class="btn btn-outline-danger" (click)="deleteFacility(facility.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- footer -->
+  <div class="card-footer mt-3">
+    PasSpa Authors: Michał Bilicki & Radosław Łapciak
+  </div>
