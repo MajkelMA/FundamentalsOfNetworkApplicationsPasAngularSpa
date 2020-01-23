@@ -102,7 +102,7 @@
             </div>
 
             <div class="custom-control custom-switch" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
-                <input type="checkbox" class="custom-control-input" id="customSwitch1" (change)="access=!access">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="access">
                 <label class="custom-control-label" for="customSwitch1">Access</label>
             </div>
 
@@ -172,8 +172,7 @@
 
             <div *ngIf="facilityType==FOOTBALL">
                 <div class="custom-control custom-switch" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch2"
-                        (change)="fullSize=!fullSize">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch2" [(ngModel)]="fullSize">
                     <label class="custom-control-label" for="customSwitch2">Full size</label>
                 </div>
 

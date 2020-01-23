@@ -56,31 +56,45 @@ export class CreateComponent implements OnInit {
   }
 
   createBasketballFacility() {
-    this.check();
-    this.mainService.createBasketballFacility(
-      new BasketballFacility('', this.pricePerHours, this.access, new Field(this.surfaceArea, this.maxAmountOfPeople, this.typeOfGround), this.name, "BasketballFacility", this.numberOfBasket, this.minHeightOfBasket, this.maxHeightOfBasket)
-    ).subscribe(
-      (complete) => {
-        console.log("Facility succesfully added!");
-        alert("Facility succesfully added!");
-        this.router.navigate(['/main']);
-      },
-      (error) => {
-        console.log("Facility adding failed!")
-      }
-    )
+    if (this.check()) {
+      this.mainService.createBasketballFacility(
+        new BasketballFacility('', this.pricePerHours, this.access, new Field(this.surfaceArea, this.maxAmountOfPeople, this.typeOfGround), this.name, "BasketballFacility", this.numberOfBasket, this.minHeightOfBasket, this.maxHeightOfBasket)).subscribe(
+          (complete) => {
+            console.log("Facility succesfully added!");
+            alert("Facility succesfully added!");
+            this.router.navigate(['/main']);
+          },
+          (error) => {
+            console.log("Facility adding failed!")
+          }
+        )
+    } else {
+      console.log("Facility adding failed!")
+    }
   }
 
   createFootballFacility() {
-    this.check();
-    this.mainService.createFootballFacility(
-      new FootballFacility('', this.pricePerHours, this.access, new Field(this.surfaceArea, this.maxAmountOfPeople, this.typeOfGround), this.name, "FootballFacility", this.fullSize, this.widthOfGoal, this.heightOfGoal)
-    )
+    if (this.check()) {
+      this.mainService.createFootballFacility(
+        new FootballFacility('', this.pricePerHours, this.access, new Field(this.surfaceArea, this.maxAmountOfPeople, this.typeOfGround), this.name, "FootballFacility", this.fullSize, this.widthOfGoal, this.heightOfGoal)).subscribe(
+          (complete) => {
+            console.log("Facility succesfully added!");
+            alert("Facility succesfully added!");
+            this.router.navigate(['/main']);
+          },
+          (error) => {
+            console.log("Facility adding failed!")
+          }
+        );
+    } else {
+      console.log("Facility adding failed!")
+    }
   }
 
   check() {
     if (this.access == null) {
       alert("Access has to be set!");
+      return false;
     }
 
     if (this.surfaceArea == null ||
@@ -89,6 +103,7 @@ export class CreateComponent implements OnInit {
       this.pricePerHours == null ||
       this.name == null) {
       alert("All fields have to be set!");
+      return false;
     }
 
     if (this.facilityType == this.BASKETBALL) {
@@ -96,15 +111,19 @@ export class CreateComponent implements OnInit {
         this.minHeightOfBasket == null ||
         this.maxHeightOfBasket == null) {
         alert("All fields have to be set!");
+        return false;
       }
     } else if (this.facilityType == this.FOOTBALL) {
       if (this.widthOfGoal == null ||
         this.heightOfGoal == null) {
         alert("All fields have to be set!");
+        return false;
       } else if (this.fullSize == null) {
         alert("Full size has to be set!")
+        return false;
       }
     }
+    return true;
   }
 
   reset() {

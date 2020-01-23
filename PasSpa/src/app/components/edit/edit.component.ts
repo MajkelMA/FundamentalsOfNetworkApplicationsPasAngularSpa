@@ -64,6 +64,43 @@ export class EditComponent implements OnInit {
     )
   }
 
+  check() {
+    if (this.facilityType == this.BASKETBALL) {
+      if (this.basketballFacility.access == null) {
+        alert("Access has to be set!");
+        return false;
+      } else if (this.basketballFacility.field.surfaceArea == null ||
+        this.basketballFacility.field.maxAmountOfPeople == null ||
+        this.basketballFacility.field.typeOfGround == null ||
+        this.basketballFacility.pricePerHours == null ||
+        this.basketballFacility.name == null ||
+        this.basketballFacility.numberOfBasket == null ||
+        this.basketballFacility.minHeightOfBasket == null ||
+        this.basketballFacility.maxHeightOfBasket == null) {
+        alert("All fields have to be set!");
+        return false;
+      }
+    } else {
+      if (this.footballFacility.access == null) {
+        alert("Access has to be set!");
+        return false;
+      } else if (this.footballFacility.fullSize == null) {
+        alert("Full size has to be set!");
+        return false;
+      } else if (this.footballFacility.field.surfaceArea == null ||
+        this.footballFacility.field.maxAmountOfPeople == null ||
+        this.footballFacility.field.typeOfGround == null ||
+        this.footballFacility.pricePerHours == null ||
+        this.footballFacility.name == null ||
+        this.footballFacility.widthOfGoal == null ||
+        this.footballFacility.heightOfGoal == null) {
+        alert("All fields have to be set!");
+        return false;
+      }
+    }
+    return true;
+  }
+
   setFacilityType(type: number) {
     this.facilityType = type;
   }

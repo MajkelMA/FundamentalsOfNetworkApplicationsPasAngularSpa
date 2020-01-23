@@ -93,7 +93,7 @@
 
             <div class="custom-control custom-switch" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
                 <input type="checkbox" class="custom-control-input" id="customSwitch1"
-                    (change)="basketballFacility.access=!basketballFacility.access">
+                    [(ngModel)]="basketballFacility.access">
                 <label class="custom-control-label" for="customSwitch1">Access</label>
             </div>
 
@@ -241,12 +241,12 @@
 
             <div class="custom-control custom-switch" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
                 <input type="checkbox" class="custom-control-input" id="customSwitch1"
-                    (change)="footballFacility.access=!footballFacility.access">
+                    [(ngModel)]="footballFacility.access">
                 <label class="custom-control-label" for="customSwitch1">Access</label>
             </div>
             <div class="custom-control custom-switch" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
                 <input type="checkbox" class="custom-control-input" id="customSwitch2"
-                    (change)="footballFacility.fullSize=!footballFacility.fullSize">
+                    [(ngModel)]="footballFacility.fullSize">
                 <label class="custom-control-label" for="customSwitch2">Full size</label>
             </div>
 
