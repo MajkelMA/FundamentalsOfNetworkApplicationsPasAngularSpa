@@ -46,8 +46,9 @@ export class MainComponent implements OnInit {
           console.log('Could not get filtered facilites!')
         }
       );
+    } else {
+      this.getFacilities();
     }
-    this.getFacilities();
   }
 
   editFacility(facility: Facility) {
