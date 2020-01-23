@@ -1,18 +1,230 @@
 <!-- header -->
 <div class="mt-5 ml-5 mr-5">
     <ul class="nav nav-tabs mt-3 ml-3 mr-3">
-      <div class="ml-3 mr-3">
-        <h2>PasSpa</h2>
-      </div>
+        <div class="ml-3 mr-3">
+            <h2>PasSpa</h2>
+        </div>
+        <div layout-align="end center">
+            <button type="button" style="vertical-align: middle" class="btn btn-outline-secondary" routerLink='/main'>
+                Back
+            </button>
+        </div>
     </ul>
-  
+
     <!-- body -->
     <div class="card mt-3 ml-3 mr-3">
+        <div>
+            <div class="btn-group btn-group-toggle full-button" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;"
+                checked>
+                <div class="btn-group full-button" role="group">
+                    <button type="button" class="btn btn-secondary" disabled>
+                        Facility Type
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-lg" (click)="setFacilityType(BASKETBALL)">
+                        Basketball
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-lg" (click)="setFacilityType(FOOTBALL)">
+                        Football
+                    </button>
+                </div>
+            </div>
 
+            <h5>Name:</h5>
+            <div class="input-group">
+                <input class="form-control" type="text" required [(ngModel)]="name" #validName="ngModel"
+                    (input)="name=$event.target.value">
+            </div>
+            <div *ngIf="validName.invalid && (validName.dirty || validName.touched)" class="alert alert-danger mt-2"
+                style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                <div *ngIf="validName.errors.required">
+                    Name is required.
+                </div>
+            </div>
+
+            <h5>Surface area:</h5>
+            <div class="input-group">
+                <input class="form-control" type="number" min="1" required [(ngModel)]="surfaceArea"
+                    #validSurfaceArea="ngModel" (input)="surfaceArea=$event.target.value"
+                    pattern="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$">
+            </div>
+            <div *ngIf="validSurfaceArea.invalid && (validSurfaceArea.dirty || validSurfaceArea.touched)"
+                class="alert alert-danger mt-2" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                <div *ngIf="validSurfaceArea.errors.required">
+                    Surface area is required.
+                </div>
+                <div *ngIf="validSurfaceArea.errors.pattern">
+                    Invalid number (should be greather than 0).
+                </div>
+            </div>
+
+            <h5>Max amount of people:</h5>
+            <div class="input-group">
+                <input class="form-control" type="number" min="1" required [(ngModel)]="maxAmountOfPeople"
+                    #validMaxAmountOfPeople="ngModel" (input)="maxAmountOfPeople=$event.target.value"
+                    pattern="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$">
+            </div>
+            <div *ngIf="validMaxAmountOfPeople.invalid && (validMaxAmountOfPeople.dirty || validMaxAmountOfPeople.touched)"
+                class="alert alert-danger mt-2" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                <div *ngIf="validMaxAmountOfPeople.errors.required">
+                    Max amount of people is required.
+                </div>
+                <div *ngIf="validMaxAmountOfPeople.errors.pattern">
+                    Invalid number (should be greather than 0).
+                </div>
+            </div>
+
+            <h5>Type of ground:</h5>
+            <div class="input-group">
+                <input class="form-control" type="text" required [(ngModel)]="typeOfGround" #validTypeOfGround="ngModel"
+                    (input)="typeOfGround=$event.target.value">
+            </div>
+            <div *ngIf="validTypeOfGround.invalid && (validTypeOfGround.dirty || validTypeOfGround.touched)"
+                class="alert alert-danger mt-2" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                <div *ngIf="validTypeOfGround.errors.required">
+                    Type of ground is required.
+                </div>
+            </div>
+
+            <h5>Price per hours:</h5>
+            <div class="input-group">
+                <input class="form-control" type="number" min="1" required [(ngModel)]="pricePerHours"
+                    #validPricePerHours="ngModel" (input)="pricePerHours=$event.target.value"
+                    pattern="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$">
+            </div>
+            <div *ngIf="validPricePerHours.invalid && (validPricePerHours.dirty || validPricePerHours.touched)"
+                class="alert alert-danger mt-2" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                <div *ngIf="validPricePerHours.errors.required">
+                    Price per hours is required.
+                </div>
+                <div *ngIf="validPricePerHours.errors.pattern">
+                    Invalid number (should be greather than 0).
+                </div>
+            </div>
+
+            <div class="custom-control custom-switch" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" (change)="access=!access">
+                <label class="custom-control-label" for="customSwitch1">Access</label>
+            </div>
+
+            <div *ngIf="facilityType==BASKETBALL">
+                <h5>Number of basket:</h5>
+                <div class="input-group">
+                    <input class="form-control" type="number" min="1" required [(ngModel)]="numberOfBasket"
+                        #validNumberOfBasket="ngModel" (input)="numberOfBasket=$event.target.value"
+                        pattern="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$">
+                </div>
+                <div *ngIf="validNumberOfBasket.invalid && (validNumberOfBasket.dirty || validNumberOfBasket.touched)"
+                    class="alert alert-danger mt-2" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                    <div *ngIf="validNumberOfBasket.errors.required">
+                        Number of basket is required.
+                    </div>
+                    <div *ngIf="validNumberOfBasket.errors.pattern">
+                        Invalid number (should be greather than 0).
+                    </div>
+                </div>
+
+                <h5>Minimum height of basket:</h5>
+                <div class="input-group">
+                    <input class="form-control" type="number" min="1" required [(ngModel)]="minHeightOfBasket"
+                        #validMinHeightOfBasket="ngModel" (input)="minHeightOfBasket=$event.target.value"
+                        pattern="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$">
+                </div>
+                <div *ngIf="validMinHeightOfBasket.invalid && (validMinHeightOfBasket.dirty || validMinHeightOfBasket.touched)"
+                    class="alert alert-danger mt-2" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                    <div *ngIf="validMinHeightOfBasket.errors.required">
+                        Minimum height of basket is required.
+                    </div>
+                    <div *ngIf="validMinHeightOfBasket.errors.pattern">
+                        Invalid number (should be greather than 0).
+                    </div>
+                </div>
+
+                <h5>Maximum height of basket:</h5>
+                <div class="input-group">
+                    <input class="form-control" type="number" min="1" required [(ngModel)]="maxHeightOfBasket"
+                        #validMaxHeightOfBasket="ngModel" (input)="maxHeightOfBasket=$event.target.value"
+                        pattern="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$">
+                </div>
+                <div *ngIf="validMaxHeightOfBasket.invalid && (validMaxHeightOfBasket.dirty || validMaxHeightOfBasket.touched)"
+                    class="alert alert-danger mt-2" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                    <div *ngIf="validMaxHeightOfBasket.errors.required">
+                        Maximum height of basket is required.
+                    </div>
+                    <div *ngIf="validMaxHeightOfBasket.errors.pattern">
+                        Invalid number (should be greather than 0).
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-success" (click)="createBasketballFacility()"
+                        style="margin-top: 2%;margin-left: 3%;margin-right: 3%;margin-bottom: 3%;" [disabled]="!validName.valid || 
+                        !validSurfaceArea.valid || 
+                        !validMaxAmountOfPeople.valid ||
+                        !validTypeOfGround.valid ||
+                        !validPricePerHours ||
+                        !validNumberOfBasket.valid ||
+                        !validMinHeightOfBasket.valid ||
+                        !validMaxHeightOfBasket.valid">
+                        Submit
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="facilityType==FOOTBALL">
+                <div class="custom-control custom-switch" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch2"
+                        (change)="fullSize=!fullSize">
+                    <label class="custom-control-label" for="customSwitch2">Full size</label>
+                </div>
+
+                <h5>Width of goal:</h5>
+                <div class="input-group">
+                    <input class="form-control" type="number" min="1" required [(ngModel)]="widthOfGoal"
+                        #validWidthOfGoal="ngModel" (input)="widthOfGoal=$event.target.value">
+                </div>
+                <div *ngIf="validWidthOfGoal.invalid && (validWidthOfGoal.dirty || validWidthOfGoal.touched)"
+                    class="alert alert-danger mt-2" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                    <div *ngIf="validWidthOfGoal.errors.required">
+                        Width of goal is required.
+                    </div>
+                    <div *ngIf="validWidthOfGoal.errors.pattern">
+                        Invalid number (should be greather than 0).
+                    </div>
+                </div>
+
+                <h5>Height of goal:</h5>
+                <div class="input-group">
+                    <input class="form-control" type="number" min="1" required [(ngModel)]="heightOfGoal"
+                        #validHeightOfGoal="ngModel" (input)="heightOfGoal=$event.target.value">
+                </div>
+                <div *ngIf="validHeightOfGoal.invalid && (validHeightOfGoal.dirty || validHeightOfGoal.touched)"
+                    class="alert alert-danger mt-2" style="margin-top: 2%;margin-left: 3%;margin-right: 3%;">
+                    <div *ngIf="validHeightOfGoal.errors.required">
+                        Height of goal is required.
+                    </div>
+                    <div *ngIf="validHeightOfGoal.errors.pattern">
+                        Invalid number (should be greather than 0).
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-success" (click)="createFootballFacility()"
+                        style="margin-top: 2%;margin-left: 3%;margin-right: 3%;margin-bottom: 3%;" [disabled]="!validName.valid || 
+                        !validSurfaceArea.valid || 
+                        !validMaxAmountOfPeople.valid ||
+                        !validTypeOfGround.valid ||
+                        !validPricePerHours ||
+                        !validWidthOfGoal.valid ||
+                        !validHeightOfGoal.valid">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  
-  <!-- footer -->
-  <div class="card-footer mt-3">
+</div>
+
+<!-- footer -->
+<div class="card-footer mt-3">
     PasSpa Authors: Michał Bilicki & Radosław Łapciak
-  </div>
+</div>
